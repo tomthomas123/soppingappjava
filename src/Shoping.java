@@ -45,6 +45,60 @@ public class Shoping {
                         System.out.println(e);
                     }
                     break;
+                case 2:
+                    System.out.println("View");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingdb","root","");
+                        String sql = "SELECT `product_name`, `description`, `manf_date`, `brand_name`, `price` FROM `products` ";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
+                        while (rs.next()){
+                            name = rs.getString("product_name");
+                            String Desc = rs.getString("description");
+                            String Manu_date = rs.getString("manf_date");
+                            String BrandName = rs.getString("brand_name");
+                            price = rs.getInt("price");
+                            System.out.println("Purchase name ="+name);
+                            System.out.println("Description ="+Desc);
+                            System.out.println("Date ="+Manu_date);
+                            System.out.println("Brand out ="+BrandName);
+                            System.out.println("Price ="+price+'\n');
+                        }
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
+                    break;
+                case 3:
+                    System.out.println("Search");
+                    System.out.println("Enter the product id");
+                    int id = sc.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingdb","root","");
+                        String sql = "SELECT `id`, `product_name`, `description`, `manf_date`, `brand_name`, `price` FROM `products` WHERE `id`="+id;
+                        Statement stmt = con.createStatement();
+                        ResultSet rs = stmt.executeQuery(sql);
+                        while(rs.next()){
+                            name = rs.getString("product_name");
+                            String Desc = rs.getString("description");
+                            String Manu_date = rs.getString("manf_date");
+                            String BrandName = rs.getString("brand_name");
+                            price = rs.getInt("price");
+                            System.out.println("Purchase name ="+name);
+                            System.out.println("Description ="+Desc);
+                            System.out.println("Date ="+Manu_date);
+                            System.out.println("Brand out ="+BrandName);
+                            System.out.println("Price ="+price+'\n');
+                        }
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
+                    break;
             }
         }
     }
