@@ -6,15 +6,14 @@ public class Shoping {
         Scanner sc = new Scanner(System.in);
         int choice;
         while (true) {
-            System.out.println("Enter the option below");
+            System.out.println("Enter the option below : ");
             System.out.println("1 :Insert");
             System.out.println("2 :View");
             System.out.println("3 :Search");
             System.out.println("4 :Update");
             System.out.println("5 :Delete");
-            System.out.println("6 :Number of product manufactures in between month");
-            System.out.println("7 :Name of the product staring letter");
-            System.out.println("8 :exit");
+
+            System.out.println("6 :exit");
 
             choice = sc.nextInt();
             switch (choice) {
@@ -124,6 +123,24 @@ public class Shoping {
                         System.out.println(e);
                     }
                     break;
+                case 5:
+                    System.out.println("Delete");
+                    System.out.println("Enter the id");
+                    id = sc.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/shoppingdb","root","");
+                        String sql = "DELETE FROM `products` WHERE `id`="+id;
+                        Statement stmt = con.createStatement();
+                        stmt.executeUpdate(sql);
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                        System.out.println("deleted successfully!!");
+                    }
+                    break;
+                case 6:
+                    System.exit(0);
             }
         }
     }
